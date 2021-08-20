@@ -7,32 +7,32 @@ ML302 ML302_Status;
 
 /********************************************************************
 *********************************************************************
-  ************* Éè±¸Á¬½ÓÏÌÄşÊĞ¹¤ÒµÎïÁªÍøÆ½Ì¨ ĞÅÏ¢²ÎÊıÅäÖÃ *************
-        1¡¢HOST  	 	ÏÌÄşÊĞ¹¤ÒµÎïÁªÍøMQTT·şÎñÆ÷µØÖ·
-        2¡¢PORT		  	MQTT·şÎñÆ÷µÄ¶Ë¿ÚºÅ Ò»°ã¶¼Îª1883
-        3¡¢ClientId     ¿Í»§¶ËID ÒªÉèÖÃÎªÆ½Ì¨ÉÏ´´½¨µÄÉè±¸ID 
-        4¡¢username		MQTT·şÎñÆ÷µÄÓÃ»§Ãû
-        5¡¢passwd 		MQTT·şÎñÆ÷µÄÃÜÂë
-        6¡¢Pubtopic   	ÏûÏ¢·¢²¼Ö÷Ìâ£ºÉè±¸->ÎïÁªÍøÆ½Ì¨¡£ 
-				¸ñÊ½Í³Ò»Îª"/{productId}/{deviceId}/properties/report"  
-		7¡¢Subtopic		ÏûÏ¢¶©ÔÄÖ÷Ìâ£ºÎïÁªÍøÆ½Ì¨->Éè±¸¡£ 
-    ×¢£ºÄ¿Ç°Æ½Ì¨MQTT·şÎñÆ÷²»ĞèÒªusername ºÍ passwd  ËùÒÔ4¡¢5Ïî¿ÉÒÔ²»Éè¶¨
+  ************* è®¾å¤‡è¿æ¥å’¸å®å¸‚å·¥ä¸šç‰©è”ç½‘å¹³å° ä¿¡æ¯å‚æ•°é…ç½® *************
+        1ã€HOST  	 	å’¸å®å¸‚å·¥ä¸šç‰©è”ç½‘MQTTæœåŠ¡å™¨åœ°å€
+        2ã€PORT		  	MQTTæœåŠ¡å™¨çš„ç«¯å£å· ä¸€èˆ¬éƒ½ä¸º1883
+        3ã€ClientId     å®¢æˆ·ç«¯ID è¦è®¾ç½®ä¸ºå¹³å°ä¸Šåˆ›å»ºçš„è®¾å¤‡ID 
+        4ã€username		MQTTæœåŠ¡å™¨çš„ç”¨æˆ·å
+        5ã€passwd 		MQTTæœåŠ¡å™¨çš„å¯†ç 
+        6ã€Pubtopic   	æ¶ˆæ¯å‘å¸ƒä¸»é¢˜ï¼šè®¾å¤‡->ç‰©è”ç½‘å¹³å°ã€‚ 
+				æ ¼å¼ç»Ÿä¸€ä¸º"/{productId}/{deviceId}/properties/report"  
+		7ã€Subtopic		æ¶ˆæ¯è®¢é˜…ä¸»é¢˜ï¼šç‰©è”ç½‘å¹³å°->è®¾å¤‡ã€‚ 
+    æ³¨ï¼šç›®å‰å¹³å°MQTTæœåŠ¡å™¨ä¸éœ€è¦username å’Œ passwd  æ‰€ä»¥4ã€5é¡¹å¯ä»¥ä¸è®¾å®š
 *********************************************************************
 *********************************************************************
 */
-#define HOST       "122.189.56.75"
-#define PORT       1883
-#define ClientId   "ml302"
+#define HOST       ""
+#define PORT       
+#define ClientId   ""
 #define username   ""
 #define passwd     ""
-#define Pubtopic  "/STM32/ml302/properties/report"  //·¢²¼Ö÷Ìâ
-#define Subtopic  "/STM32/ml302/properties/read"  //¶©ÔÄÖ÷Ìâ
+#define Pubtopic  "/STM32/ml302/properties/report"  //å‘å¸ƒä¸»é¢˜
+#define Subtopic  "/STM32/ml302/properties/read"  //è®¢é˜…ä¸»é¢˜
 
 
 void checkCommand(void){
 	//char *str_led = NULL;
-	/*cJSON * strJson = cJSON_Parse((char*)RxBuffer);   //´´½¨JSON½âÎö¶ÔÏó£¬·µ»ØJSON¸ñÊ½ÊÇ·ñÕıÈ·
-	cJSON *ledJson = cJSON_GetObjectItem(strJson,"ML302_LED"); //»ñÈ¡Õâ¸ö¶ÔÏó³ÉÔ±
+	/*cJSON * strJson = cJSON_Parse((char*)RxBuffer);   //åˆ›å»ºJSONè§£æå¯¹è±¡ï¼Œè¿”å›JSONæ ¼å¼æ˜¯å¦æ­£ç¡®
+	cJSON *ledJson = cJSON_GetObjectItem(strJson,"ML302_LED"); //è·å–è¿™ä¸ªå¯¹è±¡æˆå‘˜
 	if(!ledJson){
 		Uart1_SendStr("Can not find ML302_LED");
 		
@@ -49,7 +49,7 @@ void checkCommand(void){
 		json_len = strlen("{\"properties\":{\"ML302_LED\":\"ON\"}}")/sizeof(char);
 		printf("AT+MQTTPUB=\"%s\",1,0,0,%d\r\n",Pubtopic,json_len);
 		HAL_Delay(300);
-		printf("{\"properties\":{\"ML302_LED\":\"ON\"}}");//·¢²¼Êı¾İµ½Æ½Ì¨
+		printf("{\"properties\":{\"ML302_LED\":\"ON\"}}");//å‘å¸ƒæ•°æ®åˆ°å¹³å°
 		HAL_Delay(300);
 		IWDG_Feed();
 	}else if(str2){
@@ -57,22 +57,22 @@ void checkCommand(void){
 		json_len = strlen("{\"properties\":{\"ML302_LED\":\"OFF\"}}")/sizeof(char);
 		printf("AT+MQTTPUB=\"%s\",1,0,0,%d\r\n",Pubtopic,json_len);
 		HAL_Delay(300);
-		printf("{\"properties\":{\"ML302_LED\":\"OFF\"}}");//·¢²¼Êı¾İµ½Æ½Ì¨
+		printf("{\"properties\":{\"ML302_LED\":\"OFF\"}}");//å‘å¸ƒæ•°æ®åˆ°å¹³å°
 		HAL_Delay(300);
 		IWDG_Feed();
 	}
 }
 
-void Clear_Buffer(void)//Çå¿Õ»º´æ
+void Clear_Buffer(void)//æ¸…ç©ºç¼“å­˜
 {
 	uint8_t i;
 	strcpy((char*)(ML302_Status.recdata),(char*)RxBuffer);
 	Uart1_SendStr((char*)RxBuffer);
 	checkCommand();
 	for(i=0;i<100;i++)
-		RxBuffer[i]=0;//»º´æ
+		RxBuffer[i]=0;//ç¼“å­˜
 	Rxcouter=0;
-	IWDG_Feed();//Î¹¹·
+	IWDG_Feed();//å–‚ç‹—
 	
 }
 void ML302_Init(void)
@@ -81,90 +81,90 @@ void ML302_Init(void)
 	HAL_Delay(300);
     printf("AT\r\n"); 
     HAL_Delay(300);
-    strx=strstr((const char*)RxBuffer,(const char*)"OK");//·µ»ØOK
+    strx=strstr((const char*)RxBuffer,(const char*)"OK");//è¿”å›OK
     Clear_Buffer();	
     while(strx==NULL)
     {
         Clear_Buffer();	
         printf("AT\r\n"); 
         HAL_Delay(300);
-        strx=strstr((const char*)RxBuffer,(const char*)"OK");//·µ»ØOK
+        strx=strstr((const char*)RxBuffer,(const char*)"OK");//è¿”å›OK
     }
-    printf("ATE0&W\r\n"); //¹Ø±Õ»ØÏÔ
+    printf("ATE0&W\r\n"); //å…³é—­å›æ˜¾
     HAL_Delay(300);
-    printf("AT+MQTTDISC\r\n");//¹Ø±ÕÉÏÒ»´ÎÁ¬½Ó
+    printf("AT+MQTTDISC\r\n");//å…³é—­ä¸Šä¸€æ¬¡è¿æ¥
     HAL_Delay(300);
-    printf("AT+CIMI\r\n");//»ñÈ¡¿¨ºÅ£¬ÀàËÆÊÇ·ñ´æÔÚ¿¨µÄÒâË¼£¬±È½ÏÖØÒª¡£
+    printf("AT+CIMI\r\n");//è·å–å¡å·ï¼Œç±»ä¼¼æ˜¯å¦å­˜åœ¨å¡çš„æ„æ€ï¼Œæ¯”è¾ƒé‡è¦ã€‚
     HAL_Delay(300);
-    strx=strstr((const char*)RxBuffer,(const char*)"460");//·µ460£¬±íÃ÷Ê¶±ğµ½¿¨ÁË
+    strx=strstr((const char*)RxBuffer,(const char*)"460");//è¿”460ï¼Œè¡¨æ˜è¯†åˆ«åˆ°å¡äº†
     Clear_Buffer();	
     while(strx==NULL){
         Clear_Buffer();	
-        printf("AT+CIMI\r\n");//»ñÈ¡¿¨ºÅ£¬ÀàËÆÊÇ·ñ´æÔÚ¿¨µÄÒâË¼£¬±È½ÏÖØÒª¡£
+        printf("AT+CIMI\r\n");//è·å–å¡å·ï¼Œç±»ä¼¼æ˜¯å¦å­˜åœ¨å¡çš„æ„æ€ï¼Œæ¯”è¾ƒé‡è¦ã€‚
         HAL_Delay(300);
-        strx=strstr((const char*)RxBuffer,(const char*)"460");//·µ»ØOK,ËµÃ÷¿¨ÊÇ´æÔÚµÄ
+        strx=strstr((const char*)RxBuffer,(const char*)"460");//è¿”å›OK,è¯´æ˜å¡æ˜¯å­˜åœ¨çš„
     }
 	
-	printf("AT+CGSN=1\r\n");//»ñÈ¡IMEI¡£
+	printf("AT+CGSN=1\r\n");//è·å–IMEIã€‚
     HAL_Delay(300);
-    strx=strstr((const char*)RxBuffer,(const char*)"+CGSN:");//·µ460£¬±íÃ÷Ê¶±ğµ½¿¨ÁË
+    strx=strstr((const char*)RxBuffer,(const char*)"+CGSN:");//è¿”460ï¼Œè¡¨æ˜è¯†åˆ«åˆ°å¡äº†
 	memset(ML302_Status.IMEI,'\0',sizeof(ML302_Status.IMEI));
 	strncpy(ML302_Status.IMEI,strx+7,15);
     Clear_Buffer();	
     while(strx==NULL){	
 		memset(ML302_Status.IMEI,'\0',sizeof(ML302_Status.IMEI));
         Clear_Buffer();	
-		printf("AT+CGSN=1\r\n");//»ñÈ¡IMEI¡£
+		printf("AT+CGSN=1\r\n");//è·å–IMEIã€‚
         HAL_Delay(300);
-        strx=strstr((const char*)RxBuffer,(const char*)"+CGSN:");//·µ»ØOK,ËµÃ÷¿¨ÊÇ´æÔÚµÄ
+        strx=strstr((const char*)RxBuffer,(const char*)"+CGSN:");//è¿”å›OK,è¯´æ˜å¡æ˜¯å­˜åœ¨çš„
 		strncpy(ML302_Status.IMEI,strx+7,15);
     }
-    printf("AT+CGDCONT=2,\"IP\",\"CMNET\"\r\n");//ÉèÖÃAPN²ÎÊı
+    printf("AT+CGDCONT=2,\"IP\",\"CMNET\"\r\n");//è®¾ç½®APNå‚æ•°
     HAL_Delay(300);
     Clear_Buffer();	
-	printf("AT+CGACT=1,2\r\n");//¼¤»îÍøÂç£¬PDP
+	printf("AT+CGACT=1,2\r\n");//æ¿€æ´»ç½‘ç»œï¼ŒPDP
 	HAL_Delay(300);
     Clear_Buffer();	
-	printf("AT+CSTT=\"CMNET\",\"\",\"\" \r\n");//¿ªÆôÍøÂç
+	printf("AT+CSTT=\"CMNET\",\"\",\"\" \r\n");//å¼€å¯ç½‘ç»œ
 	HAL_Delay(300);
     Clear_Buffer();	
-	printf("AT+CIICR\r\n");//Æô¶¯ÍøÂç½ÓÈë
+	printf("AT+CIICR\r\n");//å¯åŠ¨ç½‘ç»œæ¥å…¥
 	HAL_Delay(300);
     Clear_Buffer();	
-    printf("AT+CGATT?\r\n");//²éÑ¯¼¤»î×´Ì¬
+    printf("AT+CGATT?\r\n");//æŸ¥è¯¢æ¿€æ´»çŠ¶æ€
     HAL_Delay(300);
-    strx=strstr((const char*)RxBuffer,(const char*)"+CGATT:1");//·µ1
+    strx=strstr((const char*)RxBuffer,(const char*)"+CGATT:1");//è¿”1
     Clear_Buffer();	
 	while(strx==NULL)
 	{
 		Clear_Buffer();	
-		printf("AT+CGATT?\r\n");//»ñÈ¡¼¤»î×´Ì¬
+		printf("AT+CGATT?\r\n");//è·å–æ¿€æ´»çŠ¶æ€
 		HAL_Delay(300);
-		strx=strstr((const char*)RxBuffer,(const char*)"+CGATT:1");//·µ»Ø1,±íÃ÷×¢Íø³É¹¦
+		strx=strstr((const char*)RxBuffer,(const char*)"+CGATT:1");//è¿”å›1,è¡¨æ˜æ³¨ç½‘æˆåŠŸ
 	}
-	printf("AT+CSQ\r\n");//²éÑ¯ĞÅºÅ
+	printf("AT+CSQ\r\n");//æŸ¥è¯¢ä¿¡å·
 	HAL_Delay(300);
 	Clear_Buffer();	
   
 }
 
-//³õÊ¼»¯MQTT
+//åˆå§‹åŒ–MQTT
 void ML302_MQTTInit(void)
 {
 	
-	printf("AT+MQTTCFG=\"%s\",%d,\"%s\",30,\"\",\"\",0,\"\",0\r\n",HOST,PORT,ClientId);//ÉèÖÃÉè±¸IDºÍTokenÖµ
+	printf("AT+MQTTCFG=\"%s\",%d,\"%s\",30,\"\",\"\",0,\"\",0\r\n",HOST,PORT,ClientId);//è®¾ç½®è®¾å¤‡IDå’ŒTokenå€¼
     HAL_Delay(300);
     Clear_Buffer();	
-    printf("AT+MQTTOPEN=0,0,0,0,0,\"\",\"\"\r\n");//Á¬½Óµ½ONENETÆ½Ì¨
+    printf("AT+MQTTOPEN=0,0,0,0,0,\"\",\"\"\r\n");//è¿æ¥åˆ°ONENETå¹³å°
     HAL_Delay(300);
-    strx=strstr((const char*)RxBuffer,(const char*)"+MQTTOPEN:OK");//·µµÇÂ¼³É¹¦
+    strx=strstr((const char*)RxBuffer,(const char*)"+MQTTOPEN:OK");//è¿”ç™»å½•æˆåŠŸ
     while(strx==NULL)
     { 
-       strx=strstr((const char*)RxBuffer,(const char*)"+MQTTOPEN:OK");//µÇÂ¼µ½ONENET³É¹¦ ´ËÊ±Éè±¸»áÏÔÊ¾ÔÚÏß  
+       strx=strstr((const char*)RxBuffer,(const char*)"+MQTTOPEN:OK");//ç™»å½•åˆ°ONENETæˆåŠŸ æ­¤æ—¶è®¾å¤‡ä¼šæ˜¾ç¤ºåœ¨çº¿  
     }
     Clear_Buffer();	
 }
-//·¢ËÍÊı¾İµ½·şÎñÆ÷
+//å‘é€æ•°æ®åˆ°æœåŠ¡å™¨
 void ML302_MQTTPUBMessage(char temp,char humi){
 	 char json[] = "{\"properties\":{\"ML302_Temperature\":%0.1d,\"ML302_Humidity\":%0.1d,\"IMEI\":\"%s\"}}";
 	 char t_json[200];
@@ -174,12 +174,12 @@ void ML302_MQTTPUBMessage(char temp,char humi){
     //printf("AT+MQTTPUB=\"$sys/%s/%s/dp/post/json\",1,0,0,%d\r\n",ProductID,DeviceID,json_len);
 	 printf("AT+MQTTPUB=\"%s\",1,0,0,%d\r\n",Pubtopic,json_len);
 	 HAL_Delay(300);
-	 printf("%s",t_json);//·¢²¼Êı¾İµ½Æ½Ì¨
+	 printf("%s",t_json);//å‘å¸ƒæ•°æ®åˆ°å¹³å°
      HAL_Delay(300);
-	 strx=strstr((const char*)RxBuffer,(const char*)"+MQTTPUBACK:0");//·µ»Ø·¢²¼³É¹¦
+	 strx=strstr((const char*)RxBuffer,(const char*)"+MQTTPUBACK:0");//è¿”å›å‘å¸ƒæˆåŠŸ
 	 while(strx==NULL)
 	 { 
-		strx=strstr((const char*)RxBuffer,(const char*)"+MQTTPUBACK:0");//·¢²¼Êı¾İ³É¹¦
+		strx=strstr((const char*)RxBuffer,(const char*)"+MQTTPUBACK:0");//å‘å¸ƒæ•°æ®æˆåŠŸ
 	 }
 	 Clear_Buffer();	
 }
